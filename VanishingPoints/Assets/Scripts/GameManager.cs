@@ -16,6 +16,7 @@ public class Choice
     public int fsImpact; // Financial Stability impact
     public int mhImpact; // Mental Health impact
     public int scImpact; // Social Connections impact
+    public string result;
 }
 
 /**
@@ -28,6 +29,10 @@ public class GameManager : MonoBehaviour
     public Material[] skyboxMaterials; // add in editor
     public Scenario[] scenarios; // add in editor
     private int currentScenarioIndex = 0;
+    private int[] skyboxChangePoints = {4, 7, 9}; // After 4, 3 more, and 2 more scenarios
+    private int nextSkyboxChangeIndex = 0;
+    private int currentSkyboxMaterialIndex = 0; // Tracks which skybox material to switch to next; same as game stage
+
 
     private void Awake()
     {
@@ -42,19 +47,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Call this to present the next scenario to the player
     public void PresentNextScenario()
     {
         if (currentScenarioIndex < scenarios.Length)
         {
-            Scenario currentScenario = scenarios[currentScenarioIndex];
-            UIManager.Instance.PresentScenario(currentScenario);
+            UIManager.Instance.PresentScenario(scenarios[currentScenarioIndex]);
             currentScenarioIndex++;
+            CheckForStateTransition();
         }
         else
         {
             Debug.Log("No more scenarios.");
-            // Handle the end of the scenarios/game here
+        }
+    }
+
+    private void CheckForStateTransition()
+    {
+        if (nextSkyboxChangeIndex < skyboxChangePoints.Length && currentScenarioIndex == skyboxChangePoints[nextSkyboxChangeIndex])
+        {
+            TransitionToState((nextSkyboxChangeIndex++).ToString());
         }
     }
 
@@ -85,10 +96,14 @@ public class GameManager : MonoBehaviour
     public void TransitionToState(string newState)
     {
         Debug.Log("Transitioning to state: " + newState);
-        int newIndex;
-        if(int.TryParse(newState, out newIndex))
+        if (int.TryParse(newState, out int newIndex) && newIndex >= 0 && newIndex < skyboxMaterials.Length)
         {
-            ChangeSkybox(newIndex);
+            RenderSettings.skybox = skyboxMaterials[newIndex];
+            DynamicGI.UpdateEnvironment();
+        }
+        else
+        {
+            Debug.LogError($"Invalid state or skybox index: {newState}");
         }
     }
 }

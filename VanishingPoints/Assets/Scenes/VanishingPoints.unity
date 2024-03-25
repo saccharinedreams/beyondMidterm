@@ -1126,16 +1126,96 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
   - {fileID: 2100000, guid: cc421da483ed06c49933077a621bff25, type: 2}
   scenarios:
-  - description: 
+  - description: 'You are exhausted this morning. You spent last night scrolling
+      mindlessly through social media, trying to distract yourself from the stress
+      of a looming project deadline at work and rent due. You would love to boost
+      your mood with a specialty drink from the artisan cafe nearby, but it would
+      be cheaper to just have a shitty cup of Walmart Great Value house blend Keurig
+      coffee.  '
     choices:
-    - description: 
-      fsImpact: 0
-      mhImpact: 0
+    - description: Make coffee at home
+      fsImpact: 5
+      mhImpact: 5
       scImpact: 0
-    - description: 
+      result: "You decide to make coffee at home. It\u2019s not great, but it gets
+        the job done. Since you\u2019re already at home, you decide to work from
+        home that day, and you end up getting a lot of work done for the project.
+        You feel productive and satisfied, although a bit lonely. "
+    - description: Go to the cafe
+      fsImpact: -5
+      mhImpact: 5
+      scImpact: 5
+      result: "You decide to treat yourself and go to the cafe to order a 16 ounce
+        extra hot latte with 3/4 pumps of Irish cream, 3/4 vanilla, stirred once
+        to the right and three times to the left with whip. While you\u2019re there,
+        you decide to work on your project and end up chatting with someone sitting
+        nearby who happens to be from an agency that your company often collaborates
+        with. You spend a fun morning venting about the unstable nature of your work
+        together, but end up not actually working much. "
+  - description: A few days later, you notice a local online forum organizing a park
+      clean-up event. The park is close to where you live, and you have been meaning
+      to visit it for a while. At the same time, someone has offered you a side gig
+      doing some marketing work for their startup. You feel a strong sense of obligation
+      to help out with the project and you could use the extra money, but it would
+      mean working even more hours so you wouldn't have time to go to the event.
+    choices:
+    - description: Work overtime to ensure the project's success
+      fsImpact: 10
+      mhImpact: -10
+      scImpact: -5
+      result: "You work overtime, sacrificing time for sleep. The project is a success,
+        and you\u2019re glad you made some money on the side. You feel a bit burnt
+        out that night and want to relax, so you end up scrolling on social media
+        again. After seeing other people going out in the city, you wish you had
+        time to do more activities outside of work."
+    - description: Park cleanup
+      fsImpact: -5
+      mhImpact: 10
+      scImpact: 10
+      result: 'You decide not to accept the gig and attend the park cleanup. It feels
+        good to get outside and be active in your community. You meet a lot of people
+        and go home feeling good about yourself. '
+  - description: "Lately, you\u2019ve been feeling like you\u2019re hemorrhaging
+      money by eating out in the city, paying bills, and general life expenses. You\u2019ve
+      been invited to another dinner with some old friends who you don\u2019t know
+      very well anymore, and you\u2019re not sure if it\u2019s worth spending the
+      money to eat out again."
+    choices:
+    - description: Cut back on social activities
+      fsImpact: -15
+      mhImpact: -5
+      scImpact: -10
+      result: You decide not to go to the dinner and stay in. At first, you are happy
+        to save money, but you end up feeling isolated, so you go on an online shopping
+        spree to fill the void and spend more money than the dinner would have cost.
+    - description: Catch up with old friends
+      fsImpact: -10
+      mhImpact: 5
+      scImpact: 5
+      result: You go to meet your friends, who have chosen a very expensive restaurant
+        to meet at, which annoys you. At first, you are upset that you came, but
+        you end up having a good time and make plans to meet again.
+  - description: "You are invited to a fancy black tie work event. It is a fundraiser
+      for the company\u2019s social responsibility commitments and requires you to
+      purchase a ticket. You are not particularly interested in going as you don\u2019t
+      know many of the people who are going to the event, but it might be nice to
+      support the fundraiser. "
+    choices:
+    - description: Attend the event
+      fsImpact: -5
+      mhImpact: -5
+      scImpact: -5
+      result: "You buy the ticket and attend the event, hoping to connect with some
+        coworkers there. The event is very well planned. The decor and catering is
+        quite impressive, but you find the conversation shallow and don\u2019t engage
+        much with anyone due to social anxiety and feel more alienated than ever."
+    - description: Have a quiet night in
       fsImpact: 0
-      mhImpact: 0
+      mhImpact: -10
       scImpact: 0
+      result: You decide to stay in to focus on saving money and self-care, but end
+        up feeling a profound sense of loneliness as you scroll through photos of
+        the event online.
 --- !u!1001 &856219833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2275,6 +2355,7 @@ GameObject:
   - component: {fileID: 1851248571}
   - component: {fileID: 1851248570}
   - component: {fileID: 1851248569}
+  - component: {fileID: 1851248573}
   m_Layer: 0
   m_Name: LeftChoice
   m_TagString: Untagged
@@ -2297,7 +2378,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2368,6 +2449,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1851248573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851248568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1dab43655393640abe8a3959cfaab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeftChoice: 1
 --- !u!1 &1948471452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2474,6 +2568,7 @@ GameObject:
   - component: {fileID: 2075622273}
   - component: {fileID: 2075622272}
   - component: {fileID: 2075622271}
+  - component: {fileID: 2075622275}
   m_Layer: 0
   m_Name: RightChoice
   m_TagString: Untagged
@@ -2496,7 +2591,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2567,6 +2662,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2075622275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075622270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1dab43655393640abe8a3959cfaab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeftChoice: 0
 --- !u!1001 &2082066925
 PrefabInstance:
   m_ObjectHideFlags: 0
