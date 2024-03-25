@@ -47,6 +47,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (scenarios.Length > 0)
+        {
+            CurrentScenario = scenarios[0];
+            PresentNextScenario(); 
+        }
+    }
+
     public void PresentNextScenario()
     {
         if (currentScenarioIndex < scenarios.Length)

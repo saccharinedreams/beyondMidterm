@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 /**
 Handles all UI-related activities, such as showing choices to the player and updating score displays.
 **/
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
-
-    public Text mentalHealthText;
-    public Text financialStabilityText;
-    public Text socialConnectionsText;
+    public TextMeshProUGUI mentalHealthText;
+    public TextMeshProUGUI financialStabilityText;
+    public TextMeshProUGUI socialConnectionsText;
+    public TextMeshProUGUI scenarioDescriptionText;
 
     private void Awake()
     {
@@ -27,9 +27,13 @@ public class UIManager : MonoBehaviour
 
     public void PresentScenario(Scenario scenario)
     {
-        // Update the UI to show the scenario.description
-        // For each choice in scenario.choices, display buttons dynamically
-        // Each button should have an onClick listener that calls GameManager.Instance.MakeChoice with the respective Choice object
+        if (scenarioDescriptionText != null && scenario != null)
+        {
+            scenarioDescriptionText.text = scenario.description;
+        }
+        else
+        {
+            Debug.LogError("Scenario description TextMeshProUGUI component or scenario is null.");
+        }
     }
-
 }
