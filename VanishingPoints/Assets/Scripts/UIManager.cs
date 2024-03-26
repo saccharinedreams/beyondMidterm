@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI financialStabilityText;
     public TextMeshProUGUI socialConnectionsText;
     public TextMeshProUGUI scenarioDescriptionText;
+    public TextMeshProUGUI choiceAText;
+    public TextMeshProUGUI choiceBText;
 
     private void Awake()
     {
@@ -30,6 +32,8 @@ public class UIManager : MonoBehaviour
         if (scenarioDescriptionText != null && scenario != null)
         {
             scenarioDescriptionText.text = scenario.description;
+            choiceAText.text = scenario.choices[0].description;
+            choiceBText.text = scenario.choices[1].description;
         }
         else
         {
