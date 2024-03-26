@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private int[] skyboxChangePoints = {4, 7, 9}; // After 4, 3 more, and 2 more scenarios
     private int nextSkyboxChangeIndex = 0;
     private int currentSkyboxMaterialIndex = 0; // Tracks which skybox material to switch to next; same as game stage
+    private bool canMakeChoice = true;
 
 
     private void Awake()
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
         {
             UIManager.Instance.PresentScenario(scenarios[currentScenarioIndex]);
             currentScenarioIndex++;
+            CurrentScenario = scenarios[currentScenarioIndex];
             CheckForStateTransition();
         }
         else
@@ -80,12 +82,24 @@ public class GameManager : MonoBehaviour
 
     public Scenario CurrentScenario { get; private set; } 
 
-    // Called when a choice is made within a scenario
     public void MakeChoice(Choice choice)
     {
+        if (!canMakeChoice) return; 
+        canMakeChoice = false;
+        Debug.Log("fs impact: " + choice.fsImpact.ToString());
+        Debug.Log("mh impact: " + choice.mhImpact.ToString());
+        Debug.Log("sc impact: " + choice.scImpact.ToString());
         ScoreManager.Instance.AdjustScore("FS", choice.fsImpact);
         ScoreManager.Instance.AdjustScore("MH", choice.mhImpact);
         ScoreManager.Instance.AdjustScore("SC", choice.scImpact);
+        UIManager.Instance.PresentResult(choice);
+        StartCoroutine(ChoiceCooldownAndNextScenario());
+    }
+
+    private IEnumerator ChoiceCooldownAndNextScenario()
+    {
+        yield return new WaitForSeconds(10f); 
+        canMakeChoice = true;
         PresentNextScenario();
     }
 

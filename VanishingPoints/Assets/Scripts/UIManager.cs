@@ -40,4 +40,11 @@ public class UIManager : MonoBehaviour
             Debug.LogError("Scenario description TextMeshProUGUI component or scenario is null.");
         }
     }
+
+    public void PresentResult(Choice choice)
+    {
+        scenarioDescriptionText.text = choice.result;
+        choiceAText.text = "Keep going.";
+        choiceBText.text = "Keep going.";
+    }
 }

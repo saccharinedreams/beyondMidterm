@@ -22,19 +22,22 @@ public class ScoreManager : MonoBehaviour
 
     public void AdjustScore(string scoreType, int amount)
     {
+        //Debug.Log($"Applying {amount} impact to {scoreType}");
         switch (scoreType)
         {
             case "MH":
                 MentalHealth += amount;
+                //Debug.Log($"After adjustment: {scoreType} score is {MentalHealth}");
                 break;
             case "FS":
                 FinancialStability += amount;
+                //Debug.Log($"After adjustment: {scoreType} score is {FinancialStability}");
                 break;
             case "SC":
+                //Debug.Log($"After adjustment: {scoreType} score is {SocialConnections}");
                 SocialConnections += amount;
                 break;
         }
-
         UIManager.Instance.UpdateUI(MentalHealth, FinancialStability, SocialConnections);
     }
 }
