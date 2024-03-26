@@ -25,6 +25,26 @@ public class UIManager : MonoBehaviour
         mentalHealthText.text = "MH: " + mh;
         financialStabilityText.text = "FS: " + fs;
         socialConnectionsText.text = "SC: " + sc;
+
+        mentalHealthText.color = GetColorBasedOnScore(mh);
+        financialStabilityText.color = GetColorBasedOnScore(fs);
+        socialConnectionsText.color = GetColorBasedOnScore(sc);
+    }
+
+    private Color GetColorBasedOnScore(int score)
+    {
+        if (score < 20)
+        {
+            return Color.red;
+        }
+        else if (score < 40)
+        {
+            return new Color(1f, 0.647f, 0f); 
+        }
+        else
+        {
+            return Color.white; 
+        }
     }
 
     public void PresentScenario(Scenario scenario)
